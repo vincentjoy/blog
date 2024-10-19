@@ -24,7 +24,7 @@ def home(request):
     return render(request, 'posts/home.html', {'posts': posts})
 
 def post(request, id):
-    return HttpResponse(id)
+    return render(request, 'posts/post.html', {'postid': id})
 
 def google(request):
     return HttpResponseRedirect('https://www.google.com')
