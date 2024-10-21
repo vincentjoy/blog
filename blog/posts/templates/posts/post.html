@@ -5,10 +5,6 @@
     Post Page
 {% endblock title %}
 
-{% block css %}
-    <link rel="stylesheet" href="{% static "posts/home.css" %}">
-{% endblock css %}
-
 {% block body %}
     <a href="{% url "home" %}">Home Page</a>
     <h1>Single post with id - {{postid}}</h1>
