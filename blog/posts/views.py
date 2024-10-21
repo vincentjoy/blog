@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.template import loader
 
 posts = [
@@ -24,4 +24,13 @@ def home(request):
     return render(request, 'posts/index.html', {'posts': posts})
 
 def post(request, id):
-    return render(request, 'posts/post.html', {'postid': id})
+    valid_id = False
+    for post in posts:
+        if post['id'] == id:
+            post_dict = post
+            valid_id = True
+            break
+    if valid_id:
+        return render(request, 'posts/post.html', {'post_dict': post_dict})
+    else:
+        return HttpResponseNotFound("Post not available")
