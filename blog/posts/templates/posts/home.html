@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <title>Blog Home Page</title>
-</head>
+{% block title %}
+Blog Home Page
+{% endblock title %}
 
-<body>
-    {% for post in posts %}
-    <a href="/posts/{{post.id}}/"><h1>{{post.title}}</h1></a>
-    <p>{{post.content}}</p>
-    {% endfor %}
-
-</body>
-</html>
+{% block body %}
+{% for post in posts %}
+<a href="/posts/{{post.id}}/"><h1>{{post.title}}</h1></a>
+<p>{{post.content}}</p>
+{% endfor %}
+{% endblock body %}
