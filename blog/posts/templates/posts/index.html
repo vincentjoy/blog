@@ -115,52 +115,48 @@
                 </div>
             </div>
         </nav>
-        <div class="content d-flex flex-column">
-            <img class="text-center" src="" />
-                <div class="h5 text-center text-body-secondary">25th January 2024</div>
-
-                <h1 class="text-center fs-1 fw-bold my-3">Post Title</h1>
-                <div class="d-flex justify-content-center align-items-center flex-wrap ">
-
-                        <a href="" class="btn btn-dark opacity-70 text-light m-2">#python</a>
-
-                  <a href="" class="btn btn-dark opacity-70 text-light m-2">#python</a>
-                    <a href="" class="btn btn-primary opacity-70 text-light m-2">#datastructures & algorithms</a>
-                    <a href="" class="btn btn-danger opacity-70 text-light m-2">#programming</a>
-                    <a href="" class="btn btn-success opacity-70 text-light m-2">#software developers</a>
-                    <a href="" class="btn btn-dark opacity-70 text-light m-2">#Travel</a>
-                    <a href="" class="btn btn-primary opacity-70 text-light m-2">#Food</a>
-                </div>
-                <hr class="border border-dark border-1 opacity-50">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis libero corrupti nostrum sapiente iure assumenda est? Alias, nihil rerum. Aperiam aliquid distinctio quos illum sunt, incidunt, maiores accusamus cupiditate temporibus eligendi magnam obcaecati expedita consequuntur architecto voluptas omnis reiciendis recusandae reprehenderit eum commodi sequi atque sed maxime? Blanditiis officiis ab laborum doloremque aperiam architecto nam ratione pariatur totam recusandae quia dolor exercitationem corporis facilis, autem, non ducimus soluta necessitatibus molestias ipsam ipsum nihil rerum quibusdam officia. A molestias quisquam libero, voluptas laborum fugit fuga reiciendis eveniet officia, alias eligendi assumenda neque quo vel asperiores doloribus veritatis debitis esse modi, deleniti incidunt facilis? Repudiandae, ex. Reiciendis quam modi rerum blanditiis laudantium repellat mollitia quisquam aliquam totam doloremque cumque deserunt, optio iure vitae error facere eligendi atque ea numquam voluptatum? Velit odit dignissimos id doloribus molestiae repellat officia labore amet fugit beatae, debitis vitae soluta consequuntur deserunt esse accusantium quidem dolorum et quos, blanditiis tempora vero iusto, est excepturi. Accusantium fugiat, quisquam consequatur excepturi dolorem numquam adipisci dignissimos et, at minima eius earum libero odit? Aspernatur nobis quia architecto esse. Sed ipsam nulla porro. Natus molestias, quo dolorum sed cumque earum omnis consequuntur saepe distinctio beatae, id repudiandae fugit numquam ducimus itaque at dignissimos vitae voluptas quod perferendis deleniti illum quam. Corrupti aut dolorum, pariatur, beatae dignissimos ab tempora magnam enim necessitatibus ducimus fugit voluptatem culpa doloribus aspernatur blanditiis. Architecto quibusdam commodi quae consequuntur nesciunt reiciendis temporibus consectetur sit blanditiis rerum, dolore sequi ab molestias, voluptatibus provident sed deleniti alias officia totam, praesentium ipsam. Iure, suscipit corrupti.</p>
-            </div>
-            <h2>Comments</h2>
-            <form method='POST'>
-                <textarea name="" class="form-control" id=""></textarea>
-                <button type='submit' class='btn btn-primary'>Comment</button>
-            </form>
-            <h2 class='bg-danger'>Login To Comment</h2>
-
-            <div class="card m-2">
-
-                <div class="card-body">
+        <h1 class="my-3">Latest</h1>
+        <div class="row">
+            {% for post in posts %}
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
-                        <div class="col">
-                            <img src="https://static.vecteezy.com/system/resources/previews/000/550/980/non_2x/user-icon-vector.jpg"
-                                class="w-25 img-thumbnail rounded-circle" alt="...">
+                        <div class="col-md-4">
+                            <div class="image-container">
+                                <img src="" class="img-fluid rounded-start" alt="...">
+                            </div>
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Username</h5>
-                                <p class="card-text">Comment from the user</p>
-                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                                <h5 class="card-title fw-bold">{{post.title|title}}</h5>
+                                <p class="card-text fw-normal">{{post.content}}</p>
+                                <p class="card-text fw-normal"><small class="text-body-secondary">25th Jan 2024</small></p>
+                                <a href="{% url "post" post.id %}" class="btn btn-dark">Read More</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+            {% endfor %}
         </div>
+        <div class="container d-flex justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="">Previous</a></li>
+
+                    <li class="page-item"><a class="page-link" href="">1</a></li>
+
+
+                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
+
+                    <li class="page-item"><a class="page-link" href="">3</a></li>
+
+                    <li class="page-item"><a class="page-link" href="">Next</a></li>
+
+                </ul>
+            </nav>
+        </div>
+
     </div>
 
     <footer class="container  py-3">
