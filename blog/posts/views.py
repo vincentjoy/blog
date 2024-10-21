@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.http import HttpResponseNotFound, Http404
 from django.template import loader
 
 posts = [
@@ -33,4 +33,4 @@ def post(request, id):
     if valid_id:
         return render(request, 'posts/post.html', {'post_dict': post_dict})
     else:
-        return HttpResponseNotFound("Post not available")
+        raise Http404()
