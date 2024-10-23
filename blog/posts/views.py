@@ -8,14 +8,8 @@ def home(request):
     return render(request, 'posts/index.html', {'posts': all_posts})
 
 def post(request, id):
-    valid_id = False
-    all_posts = Post.objects.all()
-    for post in all_posts:
-        if post['id'] == id:
-            post_dict = post
-            valid_id = True
-            break
-    if valid_id:
-        return render(request, 'posts/post.html', {'post_dict': post_dict})
-    else:
+    try:
+        post = Post.objects.get(id=id)
+        return render(request, 'posts/post.html', {'post_dict': post})
+    except:
         raise Http404()
