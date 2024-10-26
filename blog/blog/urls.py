@@ -20,6 +20,7 @@ from django.urls import path, include
 urlpatterns = [
     path('post/', include('posts.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls'))
 ]
 
 admin.site.site_header = 'My Blog'
