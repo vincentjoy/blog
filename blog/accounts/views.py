@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import RegisterForm
 from django.urls import reverse
+from django.contrib.auth.forms import AuthenticationForm
 
 def register(request):
     if request.method == 'POST':
@@ -16,3 +17,7 @@ def register(request):
     return render(request, 'accounts/register.html', {
         'form': form
     })
+
+def auth_login(request):
+    form = AuthenticationForm()
+    return render(request, 'accounts/login.html', {'form': form})
