@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from .forms import RegisterForm
 from django.urls import reverse
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate
 
 def register(request):
     if request.method == 'POST':
@@ -19,5 +20,17 @@ def register(request):
     })
 
 def auth_login(request):
-    form = AuthenticationForm()
+    if request.method == 'POST':
+        form = AuthenticationForm(request=request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                homeurl = reverse('home')
+                return HttpResponseRedirect(homeurl)
+        else:
+            form = AuthenticationForm()
+
     return render(request, 'accounts/login.html', {'form': form})
