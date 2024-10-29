@@ -19,16 +19,19 @@ def register(request):
     })
 
 def auth_login(request):
-    if request.method == 'POST':
-        form = LoginForm(request=request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                homeurl = reverse('home')
-                return HttpResponseRedirect(homeurl)
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('post/home')
     else:
-        form = LoginForm()
-    return render(request, 'accounts/login.html', {'form': form})
+        if request.method == 'POST':
+            form = LoginForm(request=request, data=request.POST)
+            if form.is_valid():
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password']
+                user = authenticate(username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    homeurl = reverse('home')
+                    return HttpResponseRedirect(homeurl)
+        else:
+            form = LoginForm()
+        return render(request, 'accounts/login.html', {'form': form})
