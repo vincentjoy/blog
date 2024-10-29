@@ -5,22 +5,25 @@ from django.urls import reverse
 from django.contrib.auth import authenticate
 
 def register(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            homeurl = reverse('home')
-            return HttpResponseRedirect(homeurl)
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('/post/home')
     else:
-        form = RegisterForm()
+        if request.method == 'POST':
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                form.save()
+                homeurl = reverse('home')
+                return HttpResponseRedirect(homeurl)
+        else:
+            form = RegisterForm()
 
-    return render(request, 'accounts/register.html', {
-        'form': form
-    })
+        return render(request, 'accounts/register.html', {
+            'form': form
+        })
 
 def auth_login(request):
     if request.user.is_authenticated:
-        return HttpResponseRedirect('post/home')
+        return HttpResponseRedirect('/post/home')
     else:
         if request.method == 'POST':
             form = LoginForm(request=request, data=request.POST)
