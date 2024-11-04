@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import RegisterForm, LoginForm
 from django.urls import reverse
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout
 
 def register(request):
     if request.user.is_authenticated:
@@ -38,3 +38,7 @@ def auth_login(request):
         else:
             form = LoginForm()
         return render(request, 'accounts/login.html', {'form': form})
+
+def auth_logout(request):
+    logout(request)
+    return HttpResponseRedirect('accounts/login/')
