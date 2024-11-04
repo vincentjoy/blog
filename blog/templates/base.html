@@ -112,7 +112,10 @@
                         <a href="{% url "register" %}" class="btn btn-dark m-3">Create Account</a>
                     {% else %}
                         <h2 style='font-size:20px; margin:5px'>{{user.get_full_name}}</h2>
-                        <a href="{% url "logout" %}" class="btn btn-dark m-3">Logout</a>
+                        <form action='{% url "logout" %}' method='POST'>
+                            {% csrf_token %}
+                            <input type='submit' class="btn btn-dark m-3" value='Logout'>
+                        </form>
                     {% endif %}
 
                     <!-- <p class="h3 fw-bold m-2 ">Welcome - Username</p> -->

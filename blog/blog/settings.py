@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'posts',
     'accounts',
-    'registration'
 ]
 
 MIDDLEWARE = [
@@ -128,4 +127,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # BUILT IN AUTH VIEW SETTINGS
 LOGIN_REDIRECT_URL = '/post/home/'
-LOGOUT_REDIRECT_URL = '/users/login/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
