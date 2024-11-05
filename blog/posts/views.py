@@ -2,8 +2,11 @@ from django.shortcuts import render
 from django.http import HttpResponseNotFound, Http404, HttpResponseRedirect
 from django.template import loader
 from .models import Post
+from .forms import CommentForm
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 def home(request):
     all_posts = Post.objects.all().order_by('-id')
@@ -14,4 +17,13 @@ def home(request):
 
 def post(request, id):
     post = get_object_or_404(Post, id=id)
-    return render(request, 'posts/post.html', {'post_dict': post})
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            posturl = reverse('post', args=[id])
+            return HttpResponseRedirect(posturl)
+    form = CommentForm()
+    return render(request, 'posts/post.html', {'post_dict': post, 'form': form})
