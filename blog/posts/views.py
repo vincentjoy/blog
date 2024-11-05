@@ -8,7 +8,8 @@ from django.core.paginator import Paginator
 def home(request):
     all_posts = Post.objects.all().order_by('-id')
     paginator = Paginator(all_posts, 4)
-    page_obj = paginator.get_page(3)
+    page_number = request.GET.get('p', 1)
+    page_obj = paginator.get_page(page_number)
     return render(request, 'posts/index.html', {'posts': page_obj})
 
 def post(request, id):
