@@ -3,10 +3,13 @@ from django.http import HttpResponseNotFound, Http404, HttpResponseRedirect
 from django.template import loader
 from .models import Post
 from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator
 
 def home(request):
-    all_posts = Post.objects.all()
-    return render(request, 'posts/index.html', {'posts': all_posts})
+    all_posts = Post.objects.all().order_by('-id')
+    paginator = Paginator(all_posts, 4)
+    page_obj = paginator.get_page(3)
+    return render(request, 'posts/index.html', {'posts': page_obj})
 
 def post(request, id):
     post = get_object_or_404(Post, id=id)
