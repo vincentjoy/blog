@@ -22,11 +22,12 @@ def post(request, id):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
+            comment.user = request.user
             comment.save()
             posturl = reverse('post', args=[id])
             return HttpResponseRedirect(posturl)
     form = CommentForm()
-    return render(request, 'posts/post.html', {'post_dict': post, 'form': form})
+    return render(request, 'posts/post.html', {'post_dict': post, 'form': form, 'comments': post.comment_set.all()})
 
 def tags(request, id):
     tag = Tag.objects.get(id=id)
