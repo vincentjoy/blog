@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseNotFound, Http404, HttpResponseRedirect
 from django.template import loader
-from .models import Post
+from .models import Post, Tag
 from .forms import CommentForm
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
@@ -27,3 +27,7 @@ def post(request, id):
             return HttpResponseRedirect(posturl)
     form = CommentForm()
     return render(request, 'posts/post.html', {'post_dict': post, 'form': form})
+
+def tags(request, id):
+    tag = Tag.objects.get(id=id)
+    return render(request, 'posts/tags.html', {'tags': tag.post_set.all()})

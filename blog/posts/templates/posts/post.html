@@ -12,14 +12,10 @@
         <h1 class="text-center fs-1 fw-bold my-3">{{post_dict.post_title}}</h1>
         <div class="d-flex justify-content-center align-items-center flex-wrap ">
 
-                <a href="" class="btn btn-dark opacity-70 text-light m-2">#python</a>
+            {% for tag in post_dict.tags.all %}
+                <a href="{% url "tag" tag.id %}" class="btn btn-dark opacity-70 text-light m-2">#{{tag}}</a>
+            {% endfor %}
 
-          <a href="" class="btn btn-dark opacity-70 text-light m-2">#python</a>
-            <a href="" class="btn btn-primary opacity-70 text-light m-2">#datastructures & algorithms</a>
-            <a href="" class="btn btn-danger opacity-70 text-light m-2">#programming</a>
-            <a href="" class="btn btn-success opacity-70 text-light m-2">#software developers</a>
-            <a href="" class="btn btn-dark opacity-70 text-light m-2">#Travel</a>
-            <a href="" class="btn btn-primary opacity-70 text-light m-2">#Food</a>
         </div>
         <hr class="border border-dark border-1 opacity-50">
         <p>{{post_dict.post_content}}</p>
