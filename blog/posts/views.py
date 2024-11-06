@@ -32,3 +32,8 @@ def post(request, id):
 def tags(request, id):
     tag = Tag.objects.get(id=id)
     return render(request, 'posts/tags.html', {'tags': tag.post_set.all()})
+
+def search(request):
+    query = request.GET.get('query', None)
+    posts = Post.objects.filter(post_title__icontains=query)
+    return render(request, 'posts/search.html', {'posts': posts})

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>Search Results</h1>
+    <div class="row">
+        {% for post in posts %}
+            {% include "posts/includes/postcard.html" %}
+        {% empty %}
+            <h2>No posts related to your query</h1>
+            <ul style="margin-left: 50px;">
+                <li>Check your query</li>
+                <li>Use other words</li>
+                <li>Contact using contact form</li>
+            </ul>
+        {% endfor %}
+    </div>
+{% endblock body %}

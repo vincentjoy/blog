@@ -102,8 +102,8 @@
                             </ul>
                         </li>
                     </ul>
-                   <form class="d-flex m-1" >
-                        <input class='form-control me-1' type='text'  />
+                   <form class="d-flex m-1" action='{% url "search" %}''>
+                        <input class='form-control me-1' type='text' name='query' />
                         <button class='btn btn-outline-dark'>Search</button>
                    </form>
 
