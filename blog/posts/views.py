@@ -24,6 +24,7 @@ class HomeView(ListView):
     template_name = 'posts/index.html'
     ordering = ['-id']
     context_object_name = 'posts'
+    paginate_by = 4
 
 def post(request, id):
     post = get_object_or_404(Post, id=id)
@@ -77,6 +78,12 @@ class SearchView(ListView):
     model = Post
     template_name = 'posts/search.html'
     context_object_name = 'posts'
+    paginate_by = 4
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.request.GET.get('query')
+        return context
 
     def get_queryset(self):
         query = self.request.GET.get('query', None)
