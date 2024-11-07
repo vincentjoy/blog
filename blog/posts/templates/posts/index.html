@@ -12,6 +12,7 @@
                 {% include "posts/includes/postcard.html" %}
             {% endfor %}
         </div>
+        {% if total > 4 %}
         <div class="container d-flex justify-content-center">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
@@ -32,7 +33,6 @@
                 </ul>
             </nav>
         </div>
-
-    </div>
+        {% endif %}
 {% endblock body %}
 

@@ -14,7 +14,7 @@ def home(request):
     paginator = Paginator(all_posts, 4, orphans=2)
     page_number = request.GET.get('p', 1)
     page_obj = paginator.get_page(page_number)
-    return render(request, 'posts/index.html', {'posts': page_obj})
+    return render(request, 'posts/index.html', {'posts': page_obj, 'total': all_posts.count()})
 
 def post(request, id):
     post = get_object_or_404(Post, id=id)
@@ -40,4 +40,4 @@ def search(request):
     posts = Post.objects.filter(Q(post_title__icontains=query) | Q(post_content__icontains=query)).order_by('-id')
     paginator = Paginator(post, 4)
     page_obj = paginator.get_page(page_number)
-    return render(request, 'posts/search.html', {'posts': page_obj, 'query': query})
+    return render(request, 'posts/search.html', {'posts': page_obj, 'query': query, 'total': posts.count()})

@@ -14,6 +14,7 @@
             </ul>
         {% endfor %}
     </div>
+    {% if total > 4 %}
     <div class="container d-flex justify-content-center">
         <nav aria-label="Page navigation example">
             <ul class="pagination">
@@ -34,4 +35,5 @@
             </ul>
         </nav>
     </div>
+    {% endif %}
 {% endblock body %}
