@@ -72,3 +72,16 @@ def search(request):
     paginator = Paginator(post, 4)
     page_obj = paginator.get_page(page_number)
     return render(request, 'posts/search.html', {'posts': page_obj, 'query': query, 'total': posts.count()})
+
+class SearchView(ListView):
+    model = Post
+    template_name = 'posts/search.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        query = self.request.GET.get('query', None)
+        if query is not None:
+            post_query = Post.objects.filter(Q(post_title__icontains=query) | Q(post_content__icontains=query)).order_by('-id')
+            return post_query
+        else:
+            Post.objects.none()
