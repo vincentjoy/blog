@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.db.models import Q
 
 def home(request):
     all_posts = Post.objects.all().order_by('-id')
@@ -35,5 +36,8 @@ def tags(request, id):
 
 def search(request):
     query = request.GET.get('query', None)
-    posts = Post.objects.filter(post_title__icontains=query)
-    return render(request, 'posts/search.html', {'posts': posts})
+    page_number = request.GET.get('p', 1)
+    posts = Post.objects.filter(Q(post_title__icontains=query) | Q(post_content__icontains=query)).order_by('-id')
+    paginator = Paginator(post, 4)
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'posts/search.html', {'posts': page_obj, 'query': query})
